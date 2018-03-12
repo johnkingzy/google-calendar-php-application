@@ -15,7 +15,6 @@ class GoogleCalendarService
     // Calendar constants
     const CAL_BASE_URL = 'https://www.googleapis.com/calendar/v3/calendars/';
     const USER_AGENT_SUFFIX = "google-api-php-client/0.4.8";
-    const token_file = "refreshtokens.txt";
 
     /*
      *   Construct function, sets up the api_config with the requeired variables
