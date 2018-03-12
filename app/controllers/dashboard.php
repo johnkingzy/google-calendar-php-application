@@ -21,8 +21,7 @@ class Dashboard extends Controller
     public static function delete($calendar_service)
     {
         $data = $_POST['data'];
-        print_r($data);
         $result = $calendar_service->delete_calendar($data);
-
+        echo json_encode(['deleted' => 1]);
     }
 }

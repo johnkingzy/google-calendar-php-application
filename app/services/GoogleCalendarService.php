@@ -131,7 +131,6 @@ class GoogleCalendarService
                 // Get a new access token using the refresh token
                 // fetch persistent refreshToken - either from database
                 $data = $this->refresh_token();
-                print_r($data);
                 // Again save the expiry time of the new token
                 $_SESSION['access_token_expiry'] = time() + $data->expires_in;
                 // The new access token
@@ -225,6 +224,9 @@ class GoogleCalendarService
         $calendar_id = ($calendar_id == null ? 'primary' : $calendar_id);
         $url = self::CAL_BASE_URL . $calendar_id . '/events';
         $events = $this->make_request($url, 'GET', 'normal', array('access_token' => $this->api_config['access_token']));
+        if ($response['headers']['respHttpCode'] !== 200) {
+            throw new Exception('Error : Failed to get calendar list');
+        }
         return $this->formatResponse($events);
     }
 

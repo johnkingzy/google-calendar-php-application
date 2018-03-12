@@ -41,8 +41,12 @@ class App
         }
         $url_params = $url ? array_values($url) : [];
         $this->params = array_merge($args, $url_params);
-
-        call_user_func_array([$this->controller, $this->method], $this->params);
+        try {
+            call_user_func_array([$this->controller, $this->method], $this->params);
+        } catch (Exception $e) {
+            header('Bad Request', true, 400);
+            echo json_encode(array('error' => 1, 'message' => $e->getMessage()));
+        }
     }
 
     public function parseUrl()
