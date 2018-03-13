@@ -223,10 +223,11 @@ class GoogleCalendarService
         $calendar_id = ($calendar_id == null ? 'primary' : $calendar_id);
         $url = self::CAL_BASE_URL . $calendar_id . '/events';
         $events = $this->make_request($url, 'GET', 'normal', array('access_token' => $this->api_config['access_token']));
+        $response = $this->formatResponse($events);
         if ($response['headers']['respHttpCode'] !== 200) {
             throw new Exception('Error : Failed to get calendar list');
         }
-        return $this->formatResponse($events);
+        return $response;
     }
 
     /*
@@ -242,8 +243,11 @@ class GoogleCalendarService
 
         $calendar_id = ($calendar_id == null ? 'primary' : $calendar_id);
         $url = self::CAL_BASE_URL . $calendarID . '/events/' . $event_id;
-        $events = $this->make_request($url, 'GET', 'normal', array('access_token' => $this->api_config['access_token']));
-        return $events;
+        $response = $this->make_request($url, 'GET', 'normal', array('access_token' => $this->api_config['access_token']));
+        if ($response['headers']['respHttpCode'] !== 200) {
+            throw new Exception('Error : Failed to get calendar list');
+        }
+        return $response;
     }
 
     /*
