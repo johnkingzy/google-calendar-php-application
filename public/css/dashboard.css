@@ -34,7 +34,7 @@ section {
 	height: 100%;
 }
 section:before {
-	content: '';
+	/* content: ''; */
 	position: absolute;
 	width: 110%;
 	height: 100%;

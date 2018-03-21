@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+RewriteRule ^ public%{REQUEST_URI} [L]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^ index.php [QSA,L]
